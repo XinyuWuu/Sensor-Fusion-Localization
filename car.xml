@@ -1,0 +1,102 @@
+<mujoco>
+   <compiler meshdir="resource/meshes" texturedir="resource/materials/textures" />
+   <asset>
+      <texture name="test" file="img3.png" type="cube" />
+      <material name="test" texture="test" specular="1" shininess="1" />
+   </asset>
+   <visual>
+      <global offwidth="1200" offheight="900" />
+   </visual>
+   <!-- <sensor>
+      <rangefinder name="rangefider1" site="rangefider1_site" />
+      <rangefinder
+   name="rangefider2" site="rangefider2_site" />
+      <rangefinder name="rangefider3"
+   site="rangefider3_site" />
+      <rangefinder name="rangefider4" site="rangefider4_site" />
+   </sensor> -->
+
+   <worldbody>
+      <light name="uplight" diffuse="1 1 1" pos="0 0 10" dir="0 0 -1" />
+      <geom pos="0 0 0" euler="0 0 0" type="plane" size="10 10 0.01" rgba="1 1 1 1" />
+      <body name="map_texture" euler="0 180 0" pos="0.005 0.005 -0.009999">
+         <geom name="map_texture" material="test" type="box" size="0.035 0.035 0.01">
+         </geom>
+      </body>
+
+      <body name="car" pos="0 0 0" euler="0 0 0">
+         <freejoint name="car"></freejoint>
+         <geom rgba="0.2 0.5 0.2 1" type="box" pos="-0.07 0 0.04" size="0.005 0.075 0.03"></geom>
+         <geom rgba="0.2 0.5 0.2 1" type="box" pos="0.07 0 0.04" size="0.005 0.075 0.03"></geom>
+         <geom rgba="0.2 0.5 0.2 1" type="box" pos="0 0.07 0.04" size="0.065 0.005 0.03"></geom>
+         <geom rgba="0.2 0.5 0.2 1" type="box" pos="0 -0.07 0.04" size="0.065 0.005 0.03"></geom>
+         <geom rgba="0.2 0.5 0.2 1" type="box" pos="0 0 0.075" size="0.075 0.075 0.005"></geom>
+         <geom rgba="0.5 0.2 0.2 1" type="cylinder" pos="0 0.075 0.0405" size="0.005 0.03"></geom>
+         <geom rgba="0.2 0.5 0.2 1" type="cylinder" pos="0 -0.075 0.0405" size="0.005 0.03"></geom>
+         <body pos="0 0.075 0.005">
+            <joint type="ball" pos="0 0 0"></joint>
+            <geom type="sphere" size="0.005"></geom>
+         </body>
+         <body pos="0 -0.075 0.005">
+            <joint type="ball" pos="0 0 0"></joint>
+            <geom type="sphere" size="0.005"></geom>
+         </body>
+         <body pos="-0.082 0 0.04" euler="0 90 0">
+            <joint damping="0.3" name="left-wheel" type="hinge" pos="0 0 0" axis="0 0 -1"></joint>
+            <geom rgba="0.1 0.1 0.1 1" type="cylinder" size="0.04 0.005"></geom>
+         </body>
+
+         <body pos="0.082 0 0.04" euler="0 -90 0">
+            <joint damping="0.3" name="right-wheel" type="hinge" pos="0 0 0" axis="0 0 1"></joint>
+            <geom rgba="0.1 0.1 0.1 1" type="cylinder" size="0.04 0.005"></geom>
+         </body>
+
+         <light cutoff="90" pos="0.075 0.075 0.03" diffuse="1 1 1" dir="-1 -1 -1"></light>
+         <light cutoff="90" pos="-0.075 0.075 0.03" diffuse="1 1 1" dir="1 -1 -1"></light>
+         <light cutoff="90" pos="0.075 -0.075 0.03" diffuse="1 1 1" dir="-1 1 -1"></light>
+         <light cutoff="90" pos="-0.075 -0.075 0.03" diffuse="1 1 1" dir="1 1 -1"></light>
+         <body name="cam_body" pos="0 0 0.03">
+            <!-- <geom rgba="1 0 0 1" type="sphere" size="0.01"></geom> -->
+            <camera name="cam1" fovy="45"></camera>
+         </body>
+      </body>
+
+
+      <!-- <body pos="0 0 0.1">
+         <geom type="box" size="0.3 0.2 0.1" rgba="0 0 1 1"
+      euler="0 0 0"></geom>
+         <site rgba="1 0 0 1" pos="0 0 0.1" euler="-90 0 0"
+      name="rangefider1_site" />
+         <site rgba="1 0 0 1" pos="0 0 0.1" euler="-90 90 0"
+      name="rangefider2_site" />
+         <site rgba="1 0 0 1" pos="0 0 0.1" euler="-90 180 0"
+      name="rangefider3_site" />
+         <site rgba="1 0 0 1" pos="0 0 0.1" euler="-90 270 0"
+      name="rangefider4_site" />
+      </body> -->
+
+      <!-- <body pos="0 0 0.1">
+         <joint type="free"></joint>
+         <geom type="sphere"
+      size="0.1" rgba="0 0 1 1"></geom>
+      </body>
+
+      <body pos="0.01 0 1">
+         <joint
+      type="free" />
+         <geom type="sphere" size=".1" rgba="0.7 0.7 0.7 1" />
+         <site
+      name="rangefider1_site" />
+      </body> -->
+
+   </worldbody>
+   <actuator>
+      <velocity name="left-velocity-servo" joint="left-wheel" kv="0.05" />
+      <velocity name="right-velocity-servo" joint="right-wheel" kv="0.05" />
+   </actuator>
+   <!-- <actuator>
+      <motor name="left-motor" joint="left-wheel" />
+      <motor
+   name="right-motor" joint="right-wheel" />
+   </actuator> -->
+</mujoco>
